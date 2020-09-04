@@ -2,7 +2,7 @@
  * @module radspec/evaluator
  */
 
-import { ethers, BigNumber } from 'ethers'
+import { BigNumber, providers as ethersProvider, utils as ethersUtils } from 'ethers'
 
 import types from '../types'
 import HelperManager from '../helpers/HelperManager'
@@ -26,10 +26,10 @@ class TypedValue {
     }
 
     if (this.type === 'address') {
-      if (!ethers.utils.isAddress(this.value)) {
+      if (!ethersUtils.isAddress(this.value)) {
         throw new Error(`Invalid address "${this.value}"`)
       }
-      this.value = ethers.utils.getAddress(this.value)
+      this.value = ethersUtils.getAddress(this.value)
     }
   }
 
@@ -52,7 +52,7 @@ class TypedValue {
  * @param {?Object} options An options object
  * @param {?Object} options.availablehelpers Available helpers
  * @param {?Object} options.availableFunctions Available function signatures
- * @param {?ethers.providers.Provider} options.provider EIP 1193 provider
+ * @param {?ethersProvider.Provider} options.provider EIP 1193 provider
  * @param {?string} options.to The destination address for this expression's transaction
  * @property {radspec/parser/AST} ast
  * @property {radspec/Bindings} bindings
@@ -243,7 +243,7 @@ export class Evaluator {
 
       if (target.type !== 'bytes20' && target.type !== 'address') {
         this.panic('Target of call expression was not an address')
-      } else if (!ethers.utils.isAddress(target.value)) {
+      } else if (!ethersUtils.isAddress(target.value)) {
         this.panic(`Invalid address "${this.value}"`)
       }
 
@@ -272,7 +272,7 @@ export class Evaluator {
           stateMutability: 'view'
         }
       ]
-      const ethersInterface = new ethers.utils.Interface(abi)
+      const ethersInterface = new ethersUtils.Interface(abi)
 
       const txData = ethersInterface.encodeFunctionData(
         node.callee,
@@ -371,7 +371,7 @@ export class Evaluator {
  * @param {?Object} options An options object
  * @param {?Object} options.availablehelpers Available helpers
  * @param {?Object} options.availableFunctions Available function signatures
- * @param {?ethers.providers.Provider} options.provider EIP 1193 provider
+ * @param {?ethersProvider.Provider} options.provider EIP 1193 provider
  * @param {?string} options.to The destination address for this expression's transaction
  * @return {string}
  */

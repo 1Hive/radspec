@@ -1,5 +1,5 @@
 // From: https://github.com/danfinlay/eth-method-registry
-import { ethers } from 'ethers'
+import { Contract, providers as ethersProviders } from 'ethers'
 
 const REGISTRY_LOOKUP_ABI = [
   'function entries(bytes4) public view returns (string)'
@@ -22,7 +22,7 @@ export default class MethodRegistry {
       throw new Error('No method registry found for the network.')
     }
 
-    this.registry = new ethers.Contract(
+    this.registry = new Contract(
       this.registryAddres,
       REGISTRY_LOOKUP_ABI,
       this.provider
