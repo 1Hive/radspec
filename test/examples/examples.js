@@ -259,7 +259,7 @@ const dataDecodeCases = [
     source: 'Melonprotocol: `@radspec(addr, data)`',
     bindings: {
       addr: address(),
-      data: bytes('0xbda53107000000000000000000000000ec67005c4e498ec7f55e092bd1d35cbc47c91892') // setPriceSource(address), on melonprotocol's knownFunctions
+      data: bytes('0xbda53100700000000000000000000000ec67005c4e498ec7f55e092bd1d35cbc47c91892') // setPriceSource(address), on melonprotocol's knownFunctions
     }
   }, 'Melonprotocol: Set price source to 0xec67005c4E498Ec7f55E092bd1d35cbC47C91892'],
   [{
