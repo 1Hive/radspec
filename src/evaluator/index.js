@@ -6,7 +6,6 @@ import { ethers, BigNumber } from 'ethers'
 
 import types from '../types'
 import HelperManager from '../helpers/HelperManager'
-import { DEFAULT_ETH_NODE } from '../defaults'
 
 /**
  * A value coupled with a type
@@ -66,7 +65,7 @@ export class Evaluator {
     this.ast = ast
     this.bindings = bindings
     this.provider =
-      provider || new ethers.providers.WebSocketProvider(DEFAULT_ETH_NODE)
+      provider || ethers.getDefaultProvider()
     this.from = from && new TypedValue('address', from)
     this.to = to && new TypedValue('address', to)
     this.value = new TypedValue('uint', BigNumber.from(value))

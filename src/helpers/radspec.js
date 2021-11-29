@@ -71,7 +71,8 @@ export default (provider, evaluator) =>
           provider,
           network: registryAddress
             ? undefined
-            : (await provider.getNetwork()).chainId
+            : 1 // We hardcode the chainId because there is only a single registy
+                // (await provider.getNetwork()).chainId
         })
         const result = await registry.lookup(methodId)
         const { name } = parse(result)

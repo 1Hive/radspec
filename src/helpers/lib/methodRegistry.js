@@ -1,8 +1,6 @@
 // From: https://github.com/danfinlay/eth-method-registry
 import { ethers } from 'ethers'
 
-import { DEFAULT_ETH_NODE } from '../../defaults'
-
 const REGISTRY_LOOKUP_ABI = [
   'function entries(bytes4) public view returns (string)'
 ]
@@ -15,7 +13,7 @@ const REGISTRY_MAP = {
 export default class MethodRegistry {
   constructor (opts = {}) {
     this.provider =
-      opts.provider || new ethers.providers.WebSocketProvider(DEFAULT_ETH_NODE)
+      opts.provider || ethers.getDefaultProvider()
     this.registryAddres = opts.registry || REGISTRY_MAP[opts.network]
   }
 
